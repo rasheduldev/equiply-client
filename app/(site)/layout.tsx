@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export default function SiteLayout({
@@ -6,9 +7,12 @@ export default function SiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="flex min-h-svh flex-col">
       <SiteHeader />
-      {children}
-    </>
+
+      <div className="flex-1">{children}</div>
+
+      <SiteFooter />
+    </div>
   );
 }

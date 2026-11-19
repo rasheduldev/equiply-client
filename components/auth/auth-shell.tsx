@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 export const authControlClass =
   "h-11 w-full rounded-lg border border-slate-200 bg-slate-50 px-3.5 text-sm text-brand-navy outline-none transition focus:border-brand-amber focus:bg-white focus:ring-2 focus:ring-brand-amber/25 placeholder:text-slate-400 dark:border-white/10 dark:bg-white/5 dark:text-white dark:focus:bg-white/10 dark:placeholder:text-white/35";
@@ -27,7 +26,7 @@ export function AuthShell({
   footer,
 }: AuthShellProps) {
   return (
-    <main className="flex min-h-[calc(100svh-5rem)] items-center justify-center bg-[#eef2f8] px-4 py-8 dark:bg-[#08172a]">
+    <main className="flex min-h-svh items-center justify-center bg-[#eef2f8] px-4 py-8 dark:bg-[#08172a]">
       <div className="mx-auto w-full max-w-md">
         <div className="overflow-hidden rounded-2xl bg-white shadow-[0_20px_55px_-25px_rgba(13,32,55,0.35)] ring-1 ring-brand-navy/5 dark:bg-brand-navy-soft dark:ring-white/10">
           <header className="bg-brand-navy px-6 py-6 text-center sm:px-8">

@@ -36,7 +36,7 @@ export default function SignUpPage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
+        
     if (pending) return;
 
     setError(null);
@@ -57,6 +57,7 @@ export default function SignUpPage() {
     }
 
     setPending(true);
+
 
     try {
       const { error: signUpError } = await authClient.signUp.email({

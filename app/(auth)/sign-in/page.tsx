@@ -26,7 +26,6 @@ export default function SignInPage() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     if (pending) return;
 
     setError(null);

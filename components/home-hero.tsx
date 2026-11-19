@@ -27,34 +27,34 @@ export function HomeHero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden bg-brand-navy"
+      className="relative isolate overflow-hidden bg-brand-cream"
     >
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_88%_12%,rgba(245,166,35,0.16),transparent_55%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_88%_10%,rgba(245,166,35,0.18),transparent_58%)]"
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-[#08172a] to-transparent"
+        className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-brand-amber/10 to-transparent"
       />
 
       <div className="mx-auto max-w-[1600px] px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Copy */}
           <div className="flex flex-col items-start">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-amber/40 bg-white/5 px-4 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-brand-sand uppercase backdrop-blur-sm sm:text-[11px]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/70 px-4 py-1.5 text-[10px] font-semibold tracking-[0.18em] text-brand-navy uppercase shadow-sm backdrop-blur-sm sm:text-[11px]">
               <span className="size-1.5 rounded-full bg-brand-amber" />
               Verified commercial rental marketplace
             </span>
 
             <h1
               id="hero-heading"
-              className="mt-6 max-w-[22ch] text-balance text-3xl leading-[1.08] font-extrabold tracking-tight text-white uppercase sm:text-4xl lg:text-5xl xl:text-[3.4rem]"
+              className="mt-6 max-w-[22ch] text-balance text-3xl leading-[1.08] font-extrabold tracking-tight text-brand-navy uppercase sm:text-4xl lg:text-5xl xl:text-[3.4rem]"
             >
               Lease the right equipment for your job
             </h1>
 
-            <p className="mt-5 max-w-xl text-sm leading-relaxed text-white/70 sm:text-base">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-brand-navy/70 sm:text-base">
               From the first site question to the final collection, find a
               practical hire plan for the work ahead. Rent verified machinery,
               cinema rigs, vehicles, and event gear with Stripe-escrowed
@@ -64,7 +64,7 @@ export function HomeHero() {
             <div className="mt-8 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
               <Link
                 href="/equipment"
-                className="group inline-flex items-center justify-center gap-2 rounded-md bg-brand-amber px-5 py-3.5 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-brand-navy uppercase transition-colors hover:bg-brand-sand focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy focus-visible:outline-none"
+                className="group inline-flex items-center justify-center gap-2 rounded-md bg-brand-amber px-5 py-3.5 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-brand-navy uppercase transition-colors hover:bg-brand-sand focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream focus-visible:outline-none"
               >
                 Explore the equipment
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
@@ -72,17 +72,17 @@ export function HomeHero() {
 
               <Link
                 href="/sign-up"
-                className="group inline-flex items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-5 py-3.5 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-white uppercase transition-colors hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy focus-visible:outline-none"
+                className="group inline-flex items-center justify-center gap-2 rounded-md border border-brand-navy/25 bg-white/60 px-5 py-3.5 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-brand-navy uppercase transition-colors hover:border-brand-navy/50 hover:bg-white focus-visible:ring-2 focus-visible:ring-brand-navy focus-visible:ring-offset-2 focus-visible:ring-offset-brand-cream focus-visible:outline-none"
               >
                 List your fleet
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
 
-            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] font-semibold tracking-[0.14em] text-white/55 uppercase sm:text-[11px]">
+            <ul className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] font-semibold tracking-[0.14em] text-brand-navy/65 uppercase sm:text-[11px]">
               {assurances.map(({ icon: Icon, label }) => (
                 <li key={label} className="flex items-center gap-2">
-                  <Icon aria-hidden className="size-4 text-brand-amber" />
+                  <Icon aria-hidden className="size-4 text-brand-amber-deep" />
                   {label}
                 </li>
               ))}
@@ -93,9 +93,9 @@ export function HomeHero() {
           <div className="relative">
             <div
               aria-hidden
-              className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-brand-amber/10 blur-3xl"
+              className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-brand-amber/30 blur-3xl"
             />
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl shadow-black/40 ring-1 ring-white/15">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl shadow-brand-navy/25 ring-1 ring-brand-navy/10">
               <Image
                 src="/images/banner_image.jpeg"
                 alt="Equiply rental fleet of compact construction and site equipment in the showroom"
@@ -106,7 +106,7 @@ export function HomeHero() {
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-brand-navy/35 via-transparent to-transparent"
+                className="absolute inset-0 bg-gradient-to-t from-brand-navy/30 via-transparent to-transparent"
               />
             </div>
           </div>
@@ -115,7 +115,7 @@ export function HomeHero() {
         {/* Category + search */}
         <form
           action="/equipment"
-          className="mt-10 rounded-2xl bg-white p-2 shadow-2xl shadow-brand-navy/40 ring-1 ring-black/5 sm:mt-12"
+          className="mt-10 rounded-2xl bg-white p-2 shadow-2xl shadow-brand-navy/20 ring-1 ring-brand-navy/10 sm:mt-12"
         >
           <div className="flex flex-col gap-2 md:flex-row md:items-center">
             <div className="relative flex-1 rounded-lg focus-within:ring-2 focus-within:ring-brand-amber/50 md:ml-1">
@@ -135,7 +135,7 @@ export function HomeHero() {
               />
             </div>
 
-            <div className="relative rounded-lg focus-within:ring-2 focus-within:ring-brand-amber/50 md:w-60 md:border-l md:border-slate-200 md:pl-1">
+            <div className="relative rounded-lg focus-within:ring-2 focus-within:ring-brand-amber/50 md:w-60 md:border-l md:border-brand-navy/10 md:pl-1">
               <label htmlFor="equipment-category" className="sr-only">
                 Equipment category
               </label>

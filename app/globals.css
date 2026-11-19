@@ -42,6 +42,8 @@
     --color-brand-navy-soft: #16304f;
     --color-brand-amber: #f5a623;
     --color-brand-amber-soft: #fff8eb;
+    --color-brand-amber-deep: #ab6a08;
+    --color-brand-cream: #f7f0e3;
     --color-brand-sand: #f1d7a3;
     --color-brand-muted: #667085;
     --radius-sm: calc(var(--radius) * 0.6);

@@ -38,8 +38,8 @@ function AuthActions({
   if (pending) {
     return (
       <div className="flex items-center gap-2">
-        <div className="h-9 w-16 animate-pulse rounded-md bg-slate-200 dark:bg-white/10" />
-        <div className="h-9 w-20 animate-pulse rounded-md bg-slate-200 dark:bg-white/10" />
+        <div className="h-9 w-16 animate-pulse rounded-md bg-white/15" />
+        <div className="h-9 w-20 animate-pulse rounded-md bg-white/15" />
       </div>
     );
   }
@@ -69,7 +69,7 @@ function AuthActions({
           onClick={onNavigate}
           className="flex min-w-0 items-center gap-2"
         >
-          <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-navy text-xs font-bold text-white ring-2 ring-brand-amber dark:bg-brand-navy-soft">
+          <span className="flex size-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-navy-soft text-xs font-bold text-white ring-2 ring-brand-amber">
             {user.image ? (
               <Image
                 src={user.image}
@@ -85,7 +85,7 @@ function AuthActions({
             )}
           </span>
 
-          <span className="max-w-30 truncate text-sm font-semibold text-brand-navy dark:text-white">
+          <span className="max-w-30 truncate text-sm font-semibold text-white">
             {name}
           </span>
         </Link>
@@ -95,7 +95,7 @@ function AuthActions({
           onClick={onSignOut}
           disabled={signingOut}
           className={cn(
-            "rounded-md bg-brand-navy px-5 py-2.5 text-xs font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-navy-soft disabled:cursor-not-allowed disabled:opacity-60 dark:bg-brand-navy-soft",
+            "rounded-md bg-white/10 px-5 py-2.5 text-xs font-bold tracking-wide text-white uppercase ring-1 ring-white/15 transition-colors hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-60",
             mobile && "w-full"
           )}
         >
@@ -111,7 +111,7 @@ function AuthActions({
         href="/sign-in"
         onClick={onNavigate}
         className={cn(
-          "rounded-md px-4 py-2.5 text-xs font-bold tracking-wide text-brand-navy uppercase transition-colors hover:text-brand-amber dark:text-white",
+          "rounded-md px-4 py-2.5 text-xs font-bold tracking-wide text-white/80 uppercase transition-colors hover:text-brand-amber",
           mobile && "flex-1 border border-white/20 text-center"
         )}
       >
@@ -122,7 +122,7 @@ function AuthActions({
         href="/sign-up"
         onClick={onNavigate}
         className={cn(
-          "group inline-flex items-center justify-center gap-2 rounded-md bg-brand-navy px-5 py-2.5 text-xs font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-navy-soft dark:bg-brand-amber dark:text-brand-navy",
+          "group inline-flex items-center justify-center gap-2 rounded-md bg-brand-amber px-5 py-2.5 text-xs font-bold tracking-wide text-brand-navy uppercase transition-colors hover:bg-brand-sand",
           mobile && "flex-1"
         )}
       >
@@ -176,13 +176,13 @@ export function SiteHeader() {
       : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm dark:border-white/10 dark:bg-[#08172a]">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-navy shadow-lg shadow-brand-navy/20">
 
       {/* Desktop Navbar */}
       <div className="mx-auto hidden h-22 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 lg:grid lg:px-8">
 
         {/* Left: Logo and Brand Name */}
-        <BrandLogo />
+        <BrandLogo variant="inverse" />
 
         {/* Center: Navigation Links */}
         <nav
@@ -201,7 +201,7 @@ export function SiteHeader() {
                   "rounded-md px-4 py-3 text-xs font-bold tracking-wide uppercase transition-colors",
                   active
                     ? "bg-brand-amber text-brand-navy"
-                    : "text-brand-navy hover:bg-brand-amber/10 dark:text-white dark:hover:text-brand-amber"
+                    : "text-white/75 hover:bg-white/10 hover:text-white"
                 )}
               >
                 {item.label}
@@ -226,7 +226,7 @@ export function SiteHeader() {
       {/* Mobile and Tablet Navbar */}
       <div className="flex h-19 items-center justify-between gap-3 px-4 lg:hidden">
 
-        <BrandLogo />
+        <BrandLogo variant="inverse" />
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
@@ -237,7 +237,7 @@ export function SiteHeader() {
             aria-expanded={mobileOpen}
             aria-controls="mobile-navigation"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            className="flex size-10 items-center justify-center rounded-md bg-brand-navy text-white transition-colors hover:bg-brand-navy-soft dark:bg-brand-navy-soft"
+            className="flex size-10 items-center justify-center rounded-md bg-white/10 text-white ring-1 ring-white/15 transition-colors hover:bg-white/20"
           >
             {mobileOpen ? (
               <X className="size-5" />
@@ -252,7 +252,7 @@ export function SiteHeader() {
       {mobileOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-slate-200 bg-white px-4 py-4 dark:border-white/10 dark:bg-[#08172a] lg:hidden"
+          className="border-t border-white/10 bg-brand-navy px-4 py-4 lg:hidden"
         >
           <nav
             aria-label="Mobile navigation"
@@ -268,10 +268,8 @@ export function SiteHeader() {
                   onClick={() => setMobileOpen(false)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-12 items-center justify-between border-b border-slate-100 px-3 text-sm font-semibold dark:border-white/10",
-                    active
-                      ? "text-brand-amber"
-                      : "text-brand-navy dark:text-white"
+                    "flex min-h-12 items-center justify-between border-b border-white/10 px-3 text-sm font-semibold",
+                    active ? "text-brand-amber" : "text-white"
                   )}
                 >
                   {item.label}
