@@ -1,7 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
-import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
@@ -25,7 +24,6 @@ export default function RootLayout({
     >
       <body>
         <ThemeProvider>
-          <SiteHeader />
           {children}
         </ThemeProvider>
       </body>

@@ -108,7 +108,7 @@ function AuthActions({
   return (
     <div className={cn("flex items-center gap-2", mobile && "w-full")}>
       <Link
-        href="/login"
+        href="/sign-in"
         onClick={onNavigate}
         className={cn(
           "rounded-md px-4 py-2.5 text-xs font-bold tracking-wide text-brand-navy uppercase transition-colors hover:text-brand-amber dark:text-white",
@@ -119,7 +119,7 @@ function AuthActions({
       </Link>
 
       <Link
-        href="/register"
+        href="/sign-up"
         onClick={onNavigate}
         className={cn(
           "group inline-flex items-center justify-center gap-2 rounded-md bg-brand-navy px-5 py-2.5 text-xs font-bold tracking-wide text-white uppercase transition-colors hover:bg-brand-navy-soft dark:bg-brand-amber dark:text-brand-navy",

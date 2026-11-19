@@ -71,7 +71,7 @@ export function HomeHero() {
               </Link>
 
               <Link
-                href="/register"
+                href="/sign-up"
                 className="group inline-flex items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-5 py-3.5 text-xs font-bold tracking-[0.12em] whitespace-nowrap text-white uppercase transition-colors hover:border-white/50 hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy focus-visible:outline-none"
               >
                 List your fleet
