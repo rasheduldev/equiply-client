@@ -15,6 +15,25 @@ export type EquipmentForm = {
   model: string
   terms: string
 }
+export type EquipmentData = {
+  name: string
+  description: string
+  category: string
+  location: string
+  rentalPrice: number
+  rentalType: RentalType
+  availableQuantity: number
+  condition: EquipmentCondition
+  brand: string
+  model: string
+  imageUrl: string
+  rentalTerms: string
+  status: "Pending"
+  ownerId: string
+  ownerName: string
+  ownerEmail: string
+  ownerImage: string
+}
 
 const STORAGE_KEY = "equiply:equipment-listings"
 
