@@ -16,10 +16,12 @@ type AuthUser = {
   name?: string | null;
   email?: string | null;
   image?: string | null;
+  role?: string | null;
 };
 
 type AuthActionsProps = {
   user: AuthUser | null;
+  dashboardUrl: string;
   pending: boolean;
   signingOut: boolean;
   onSignOut: () => void;
@@ -29,6 +31,7 @@ type AuthActionsProps = {
 
 function AuthActions({
   user,
+  dashboardUrl,
   pending,
   signingOut,
   onSignOut,
@@ -65,7 +68,7 @@ function AuthActions({
         )}
       >
         <Link
-          href="/dashboard"
+          href={dashboardUrl}
           onClick={onNavigate}
           className="flex min-w-0 items-center gap-2"
         >
@@ -73,7 +76,7 @@ function AuthActions({
             {user.image ? (
               <Image
                 src={user.image}
-                alt="Profile"
+                alt={name}
                 width={36}
                 height={36}
                 unoptimized
@@ -144,6 +147,9 @@ export function SiteHeader() {
 
   const user = session?.user ?? null;
 
+  const role = user?.role || "customer";
+  const dashboardUrl = `/dashboard/${role}`;
+
   async function handleSignOut() {
     if (signingOut) return;
 
@@ -167,7 +173,7 @@ export function SiteHeader() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/equipment", label: "All Equipment" },
-    ...(user ? [{ href: "/dashboard", label: "Dashboard" }] : []),
+    ...(user ? [{ href: dashboardUrl, label: "Dashboard" }] : []),
   ];
 
   const isActive = (href: string) =>
@@ -177,10 +183,8 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-brand-navy shadow-lg shadow-brand-navy/20">
-
       {/* Desktop Navbar */}
       <div className="mx-auto hidden h-22 max-w-[1600px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 lg:grid lg:px-8">
-
         {/* Left: Logo and Brand Name */}
         <BrandLogo variant="inverse" />
 
@@ -216,6 +220,7 @@ export function SiteHeader() {
 
           <AuthActions
             user={user}
+            dashboardUrl={dashboardUrl}
             pending={isPending}
             signingOut={signingOut}
             onSignOut={handleSignOut}
@@ -225,7 +230,6 @@ export function SiteHeader() {
 
       {/* Mobile and Tablet Navbar */}
       <div className="flex h-19 items-center justify-between gap-3 px-4 lg:hidden">
-
         <BrandLogo variant="inverse" />
 
         <div className="flex items-center gap-2">
@@ -285,6 +289,7 @@ export function SiteHeader() {
           <div className="pt-5">
             <AuthActions
               user={user}
+              dashboardUrl={dashboardUrl}
               pending={isPending}
               signingOut={signingOut}
               onSignOut={handleSignOut}
