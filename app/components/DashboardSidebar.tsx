@@ -73,7 +73,7 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
     {
       _id: "owner-equipment",
       name: "My Equipment",
-      url: "/dashboard/owner/equipment",
+      url: "/dashboard/owner/my-equipment",
       icon: Boxes,
     },
     {
