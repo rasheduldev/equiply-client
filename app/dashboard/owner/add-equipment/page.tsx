@@ -1,10 +1,9 @@
+import { AddEquipmentForm } from "./_components/add-equipment-form"
 
-const AddNewEquipmentPage = () => {
-    return (
-        <div>
-            Add New Equipment Page
-        </div>
-    );
-};
-
-export default AddNewEquipmentPage;
+export default function AddNewEquipmentPage() {
+  return (
+    <div className="mx-auto w-full max-w-4xl">
+      <AddEquipmentForm />
+    </div>
+  )
+}
