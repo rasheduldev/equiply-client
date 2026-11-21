@@ -11,3 +11,15 @@ export const createEquipment = async (data: EquipmentData) => {
     });
     return res.json();
 }
+
+export const deleteEquipment = async (equipmentId: string) => {
+  const res = await fetch(`${API_BASE_URL}/equipments/${equipmentId}`, {
+    method: "DELETE",
+  })
+
+  if (!res.ok) {
+    throw new Error("Failed to delete equipment")
+  }
+
+  return res.json()
+}

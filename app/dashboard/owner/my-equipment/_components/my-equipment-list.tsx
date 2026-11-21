@@ -1,7 +1,9 @@
+
 "use client"
 
 import Link from "next/link"
 import { useEffect, useState, type ReactNode } from "react"
+import { useRouter } from "next/navigation"
 import {
   CircleCheck,
   CircleX,
@@ -16,16 +18,21 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { authClient } from "@/lib/auth-client"
 
-import { getOwnerEquipments } from "../_lib/equipment-api"
-import { persistDelete, persistUpdate } from "../_lib/local-overrides"
+import {
+  getOwnerEquipments,
+} from "../_lib/equipment-api"
+import { persistUpdate } from "../_lib/local-overrides"
 import type { Equipment } from "../_lib/types"
 import { DeleteEquipmentDialog } from "./delete-equipment-dialog"
 import { EquipmentDetailsSheet } from "./equipment-details-sheet"
 import { EquipmentEditSheet } from "./equipment-edit-sheet"
 import { EquipmentTable } from "./equipment-table"
+import { toast } from "sonner"
+import { deleteEquipment } from "@/lib/actions/equipments"
 
 export function MyEquipmentList() {
   const { data: session, isPending } = authClient.useSession()
+  const router = useRouter()
 
   const [equipments, setEquipments] = useState<Equipment[]>([])
   const [loading, setLoading] = useState(true)
@@ -39,8 +46,10 @@ export function MyEquipmentList() {
 
   const ownerId = session?.user?.id
   const isOwner = session?.user?.role === "owner"
+
   const isLoading =
     isPending || (isOwner && (loading || loadedOwnerId !== ownerId))
+
   const countLabel = isLoading ? "..." : equipments.length
 
   useEffect(() => {
@@ -108,6 +117,7 @@ export function MyEquipmentList() {
         equipment._id === updated._id ? updated : equipment
       )
     )
+
     persistUpdate(updated._id, {
       name: updated.name,
       category: updated.category,
@@ -121,18 +131,35 @@ export function MyEquipmentList() {
       description: updated.description,
       rentalTerms: updated.rentalTerms,
     })
+
     setEditing(null)
     setFeedback("Equipment updated successfully.")
   }
 
-  function handleConfirmDelete(equipment: Equipment) {
-    setEquipments((current) =>
-      current.filter((item) => item._id !== equipment._id)
-    )
-    persistDelete(equipment._id)
-    setDeleting(null)
-    setViewing((current) => (current?._id === equipment._id ? null : current))
-    setFeedback("Equipment deleted successfully.")
+  async function handleConfirmDelete(equipment: Equipment) {
+    try {
+      await deleteEquipment(equipment._id)
+
+      setEquipments((current) =>
+        current.filter((item) => item._id !== equipment._id)
+      )
+
+      setDeleting(null)
+
+      setViewing((current) =>
+        current?._id === equipment._id ? null : current
+      )
+
+      toast.success("Equipment deleted", {
+        description: "The equipment has been permanently deleted.",
+      })
+
+      router.refresh()
+    } catch {
+      toast.error("Deletion failed", {
+        description: "Could not delete the equipment. Please try again.",
+      })
+    }
   }
 
   return (
