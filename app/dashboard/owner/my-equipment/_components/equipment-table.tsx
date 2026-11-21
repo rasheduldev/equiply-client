@@ -1,3 +1,4 @@
+
 "use client"
 
 import { formatRentalPrice } from "../_lib/format"
@@ -20,8 +21,12 @@ export function EquipmentTable({
 }: EquipmentTableProps) {
   return (
     <>
-      <div className="hidden overflow-x-auto lg:block">
+      <div className="hidden overflow-x-auto xl:block">
         <table className="w-full min-w-[920px] border-collapse text-left">
+          <caption className="sr-only">
+            Equipment listings added by the current owner
+          </caption>
+
           <thead>
             <tr className="border-b border-slate-200/80 dark:border-white/10">
               <th className="px-3 py-4 text-[11px] font-bold tracking-[0.14em] text-brand-muted uppercase dark:text-white/45">
@@ -52,7 +57,7 @@ export function EquipmentTable({
                 className="border-b border-slate-100 transition-colors last:border-0 hover:bg-slate-50/70 dark:border-white/5 dark:hover:bg-white/[0.03]"
               >
                 <td className="max-w-[340px] px-3 py-5 align-middle">
-                  <p className="text-sm font-bold text-brand-navy dark:text-white">
+                  <p className="break-words text-sm font-bold text-brand-navy dark:text-white">
                     {equipment.name}
                   </p>
                 </td>
@@ -93,12 +98,12 @@ export function EquipmentTable({
         </table>
       </div>
 
-      <div className="divide-y divide-slate-100 lg:hidden dark:divide-white/5">
+      <div className="divide-y divide-slate-100 xl:hidden dark:divide-white/5">
         {equipments.map((equipment) => (
           <article key={equipment._id} className="py-5 first:pt-0 last:pb-0">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="text-sm font-bold text-brand-navy dark:text-white">
+                <h3 className="break-words text-sm font-bold text-brand-navy dark:text-white">
                   {equipment.name}
                 </h3>
                 <p className="mt-1 text-xs text-brand-muted dark:text-white/50">
