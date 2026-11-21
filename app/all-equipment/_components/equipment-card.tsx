@@ -24,7 +24,10 @@ export function EquipmentCard({ equipment }: EquipmentCardProps) {
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_24px_60px_-45px_rgba(13,32,55,0.5)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_30px_65px_-35px_rgba(13,32,55,0.35)] dark:border-white/10 dark:bg-brand-navy-soft">
-      <div className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-white/5">
+      <Link
+        href={`/all-equipment/${equipment._id}`}
+        className="relative aspect-[16/10] overflow-hidden bg-slate-100 dark:bg-white/5"
+      >
         {equipment.imageUrl && !imageError ? (
           <Image
             src={equipment.imageUrl}
@@ -72,7 +75,7 @@ export function EquipmentCard({ equipment }: EquipmentCardProps) {
             {equipment.location || "Location not listed"}
           </span>
         </span>
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-5">
         {meta && (
@@ -82,7 +85,12 @@ export function EquipmentCard({ equipment }: EquipmentCardProps) {
         )}
 
         <h3 className="mt-1.5 line-clamp-2 text-base leading-snug font-bold text-brand-navy dark:text-white">
-          {equipment.name}
+          <Link
+            href={`/all-equipment/${equipment._id}`}
+            className="transition-colors hover:text-brand-amber"
+          >
+            {equipment.name}
+          </Link>
         </h3>
 
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-600 dark:text-white/60">
@@ -100,7 +108,7 @@ export function EquipmentCard({ equipment }: EquipmentCardProps) {
           </p>
 
           <Link
-            href={`/equipment/${equipment._id}`}
+            href={`/all-equipment/${equipment._id}`}
             aria-label={`View details for ${equipment.name}`}
             className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-md bg-brand-amber px-3.5 text-[11px] font-bold tracking-[0.08em] text-brand-navy uppercase transition-colors hover:bg-brand-sand"
           >
