@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import {
   AuthAlert,
@@ -23,6 +23,18 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const [callbackUrl, setCallbackUrl] = useState("/");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const target =
+        searchParams.get("callbackUrl") || searchParams.get("redirectTo");
+      if (target) {
+        setCallbackUrl(target);
+      }
+    }
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -43,7 +55,7 @@ export default function SignInPage() {
         return;
       }
 
-      router.replace("/");
+      router.replace(callbackUrl);
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");
@@ -60,7 +72,14 @@ export default function SignInPage() {
       footer={
         <>
           Don&apos;t have an account?{" "}
-          <Link href="/sign-up" className={authLinkClass}>
+          <Link
+            href={
+              callbackUrl !== "/"
+                ? `/sign-up?callbackUrl=${encodeURIComponent(callbackUrl)}`
+                : "/sign-up"
+            }
+            className={authLinkClass}
+          >
             Create an account
           </Link>
         </>
@@ -107,7 +126,7 @@ export default function SignInPage() {
 
         <AuthDivider />
 
-        <GoogleAuthButton onError={setError} />
+        <GoogleAuthButton callbackURL={callbackUrl} onError={setError} />
       </form>
     </AuthShell>
   );
