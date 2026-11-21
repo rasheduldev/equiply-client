@@ -172,7 +172,7 @@ export function SiteHeader() {
 
   const navItems = [
     { href: "/", label: "Home" },
-    { href: "/equipment", label: "All Equipment" },
+    { href: "/all-equipment", label: "All Equipment" },
     ...(user ? [{ href: dashboardUrl, label: "Dashboard" }] : []),
   ];
 
