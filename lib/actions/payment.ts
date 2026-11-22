@@ -55,3 +55,6 @@ export const paymentVerify = async (sessionId: string) => {
     return data
 }
 
+// Fetch bookings for a specific customer
+export { getUserBookings } from "../api/bookings"
+

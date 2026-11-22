@@ -1,11 +1,5 @@
-import React from 'react';
+import { MyRentals } from "./_components/my-rentals"
 
-const CustomerRentalsPage = () => {
-    return (
-        <div>
-            Customer rental rental page
-        </div>
-    );
-};
-
-export default CustomerRentalsPage;
+export default function CustomerRentalsPage() {
+  return <MyRentals />
+}
