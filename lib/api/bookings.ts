@@ -28,3 +28,30 @@ export const getUserBookings = async (userId: string) => {
         throw error
     }
 }
+
+
+// Get all equipment
+export const getAllEquipments = async () => {
+    const response = await fetch(`${API_BASE_URL}/equipments`, {
+        cache: 'no-store',
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch equipments')
+    }
+
+    return response.json()
+}
+
+// Get all bookings
+export const getAllBookings = async () => {
+    const response = await fetch(`${API_BASE_URL}/bookings`, {
+        cache: 'no-store',
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch bookings')
+    }
+
+    return response.json()
+}
