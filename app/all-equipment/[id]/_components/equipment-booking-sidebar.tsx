@@ -2,14 +2,18 @@
 
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Check, Heart, Star } from "lucide-react"
 import { toast } from "sonner"
 
 import type { Equipment } from "@/app/dashboard/owner/my-equipment/_lib/types"
 import { authClient } from "@/lib/auth-client"
 import { cn } from "@/lib/utils"
-
+import {
+  addToFavorites,
+  getUserFavorites,
+  removeFavorite,
+} from "@/lib/actions/favorites"
 type EquipmentBookingSidebarProps = {
   equipment: Equipment
 }
@@ -22,6 +26,32 @@ export function EquipmentBookingSidebar({
   const { data: session } = authClient.useSession()
 
   const [isFavorite, setIsFavorite] = useState(false)
+const [favoriteId, setFavoriteId] = useState<string | null>(null)
+const [isFavoriteLoading, setIsFavoriteLoading] = useState(false)
+
+useEffect(() => {
+  const checkFavorite = async () => {
+    if (!session?.user?.id || !equipment._id) return
+
+    try {
+      const favorites = await getUserFavorites(session.user.id)
+
+      const existingFavorite = favorites.find(
+        (favorite: { equipmentId: string; _id: string }) =>
+          favorite.equipmentId === equipment._id
+      )
+
+      if (existingFavorite) {
+        setIsFavorite(true)
+        setFavoriteId(existingFavorite._id)
+      }
+    } catch (error) {
+      console.error("Failed to check favorite:", error)
+    }
+  }
+
+  checkFavorite()
+}, [session?.user?.id, equipment._id])
 
   const isAvailable = equipment.availableQuantity > 0
 
@@ -49,17 +79,50 @@ export function EquipmentBookingSidebar({
     router.push(`/payment?equipmentId=${equipment._id}`)
   }
 
-  const handleToggleFavorite = () => {
-    setIsFavorite((prev) => {
-      const next = !prev
-      if (next) {
-        toast.success(`Added ${equipment.name} to your favorites!`)
-      } else {
-        toast.info(`Removed ${equipment.name} from your favorites.`)
-      }
-      return next
-    })
-  }
+  const handleToggleFavorite = async () => {
+    if (!session?.user) {
+        router.push(
+            `/sign-in?callbackUrl=${encodeURIComponent(pathname)}`
+        )
+        return
+    }
+
+    if (isFavoriteLoading) return
+
+    try {
+        setIsFavoriteLoading(true)
+
+        if (isFavorite) {
+            if (!favoriteId) return
+
+            await removeFavorite(favoriteId)
+
+            setIsFavorite(false)
+            setFavoriteId(null)
+
+            toast.success("Removed from favorites.")
+        } else {
+            const result = await addToFavorites(
+                session.user.id,
+                equipment._id
+            )
+
+            setIsFavorite(true)
+            setFavoriteId(result.insertedId)
+
+            toast.success(`Added ${equipment.name} to your favorites!`)
+        }
+    } catch (error) {
+        console.error("Favorite error:", error)
+        toast.error(
+            error instanceof Error
+                ? error.message
+                : "Something went wrong."
+        )
+    } finally {
+        setIsFavoriteLoading(false)
+    }
+}
 
   return (
     <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-sm dark:border-white/10 dark:bg-brand-navy-soft lg:sticky lg:top-28">
