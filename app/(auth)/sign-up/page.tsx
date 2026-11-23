@@ -1,9 +1,9 @@
+
 "use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { ChevronDown } from "lucide-react";
 
 import {
   AuthAlert,
@@ -13,15 +13,8 @@ import {
   authLinkClass,
   authPrimaryButtonClass,
 } from "@/components/auth/auth-shell";
+
 import { authClient } from "@/lib/auth-client";
-
-type Role = "customer" | "owner" | "admin";
-
-const roles: { value: Role; label: string }[] = [
-  { value: "customer", label: "Customer" },
-  { value: "owner", label: "Equipment Owner" },
-  { value: "admin", label: "Admin" },
-];
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -30,13 +23,12 @@ export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [photo, setPhoto] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState<Role>("customer");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-        
+
     if (pending) return;
 
     setError(null);
@@ -58,19 +50,18 @@ export default function SignUpPage() {
 
     setPending(true);
 
-
     try {
       const { error: signUpError } = await authClient.signUp.email({
         name: name.trim(),
         email: email.trim(),
         password,
         image: photo.trim() || undefined,
-        role,
       });
 
       if (signUpError) {
         setError(
-          signUpError.message || "Unable to create your account. Please try again."
+          signUpError.message ||
+            "Unable to create your account. Please try again."
         );
         return;
       }
@@ -159,29 +150,6 @@ export default function SignUpPage() {
             placeholder="Create a password"
             className={authControlClass}
           />
-        </AuthField>
-
-        <AuthField htmlFor="role" label="Register as">
-          <div className="relative">
-            <select
-              id="role"
-              name="role"
-              value={role}
-              onChange={(event) => setRole(event.target.value as Role)}
-              className={`${authControlClass} appearance-none pr-10`}
-            >
-              {roles.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-
-            <ChevronDown
-              aria-hidden="true"
-              className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-brand-muted dark:text-white/50"
-            />
-          </div>
         </AuthField>
 
         <button
