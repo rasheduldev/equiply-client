@@ -1,11 +1,5 @@
-import React from 'react';
+import { redirect } from "next/navigation"
 
-const CustomarDasboardPage = () => {
-    return (
-        <div>
-            Customar Page
-        </div>
-    );
-};
-
-export default CustomarDasboardPage;
+export default function CustomerDashboardPage() {
+  redirect("/dashboard/customer/rentals")
+}

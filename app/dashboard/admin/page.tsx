@@ -1,11 +1,21 @@
-import React from 'react';
+import { getAdminAnalytics } from "@/lib/analytics"
+import { AdminPlatformAnalytics } from "./_components/admin-platform-analytics"
 
-const AdminDashboardPage = () => {
-    return (
-        <div>
-            Admin Page
-        </div>
-    );
-};
+export default async function AdminDashboardPage() {
+  let initialData = null
+  let initialError: string | null = null
 
-export default AdminDashboardPage;
+  try {
+    initialData = await getAdminAnalytics()
+  } catch (error) {
+    initialError =
+      error instanceof Error ? error.message : "Failed to load platform analytics"
+  }
+
+  return (
+    <AdminPlatformAnalytics
+      initialData={initialData}
+      initialError={initialError}
+    />
+  )
+}

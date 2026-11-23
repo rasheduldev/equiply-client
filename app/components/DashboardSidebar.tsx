@@ -7,6 +7,7 @@ import {
   Boxes,
   ClipboardList,
   Heart,
+  LayoutDashboard,
   PackagePlus,
   ShieldCheck,
   UserRound,
@@ -65,6 +66,12 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
   ],
   owner: [
     {
+      _id: "owner-analytics",
+      name: "Business Analytics",
+      url: "/dashboard/owner",
+      icon: LayoutDashboard,
+    },
+    {
       _id: "owner-add-equipment",
       name: "Add Equipment",
       url: "/dashboard/owner/add-equipment",
@@ -90,6 +97,12 @@ const menuItemsByRole: Record<Role, MenuItem[]> = {
     },
   ],
   admin: [
+    {
+      _id: "admin-analytics",
+      name: "Platform Analytics",
+      url: "/dashboard/admin",
+      icon: LayoutDashboard,
+    },
     {
       _id: "admin-users",
       name: "All Users",
@@ -148,8 +161,20 @@ export function DashboardSidebar() {
 
   const profileUrl = `/dashboard/${role}/${role === "customer" ? "profile" : "profile"}`
 
-  const isActive = (url: string) =>
-    pathname === url || pathname.startsWith(`${url}/`)
+  const isActive = (url: string) => {
+    const cleanPath = pathname?.replace(/\/$/, "") || ""
+    const cleanUrl = url.replace(/\/$/, "")
+
+    if (
+      cleanUrl === "/dashboard/admin" ||
+      cleanUrl === "/dashboard/owner" ||
+      cleanUrl === "/dashboard/customer"
+    ) {
+      return cleanPath === cleanUrl
+    }
+
+    return cleanPath === cleanUrl || cleanPath.startsWith(`${cleanUrl}/`)
+  }
 
   return (
     <Sidebar collapsible="icon" className="border-white/10">
