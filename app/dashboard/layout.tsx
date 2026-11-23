@@ -1,16 +1,25 @@
+
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
-import { DashboardSidebar } from "../components/DashboardSidebar"
+import { DashboardSidebar } from "../components/DashboardSidebar";
+import { getSession } from "@/lib/core/server";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  const session = await getSession();
+
+  if (!session) {
+    redirect("/sign-in");
+  }
+
   return (
     <SidebarProvider>
       <DashboardSidebar />
@@ -22,8 +31,10 @@ export default function DashboardLayout({
           <p className="text-sm font-semibold tracking-tight">Dashboard</p>
         </header>
 
-        <div className="min-w-0 flex-1 p-4 md:p-6">{children}</div>
+        <div className="min-w-0 flex-1 p-4 md:p-6">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
