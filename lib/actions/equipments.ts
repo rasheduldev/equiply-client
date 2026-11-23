@@ -42,3 +42,28 @@ export const deleteEquipment = async (equipmentId: string) => {
 
   return res.json()
 }
+
+
+export const getFeaturedEquipment = async (): Promise<Equipment[]> => {
+    const res = await fetch(`${API_BASE_URL}/equipments?limit=6`, {
+        cache: "no-store",
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch featured equipment");
+    }
+
+    return res.json();
+};
+
+export const getRecentEquipment = async (): Promise<Equipment[]> => {
+    const res = await fetch(`${API_BASE_URL}/equipments?sort=recent&limit=6`, {
+        cache: "no-store",
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch recent equipment");
+    }
+
+    return res.json();
+};
